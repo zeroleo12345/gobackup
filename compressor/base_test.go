@@ -20,7 +20,8 @@ func (c Monkey) perform() (archivePath string, err error) {
 }
 
 func TestBase_archiveFilePath(t *testing.T) {
-	base := Base{}
+	model := config.ModelConfig{}
+	base := newBase(model)
 	prefixPath := path.Join(base.model.TempPath, time.Now().Format("2006.01.02.15.04"))
 	assert.True(t, strings.HasPrefix(base.archiveFilePath(".tar"), prefixPath))
 	assert.True(t, strings.HasSuffix(base.archiveFilePath(".tar"), ".tar"))
