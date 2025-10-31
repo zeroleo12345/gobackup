@@ -1,6 +1,7 @@
 package compressor
 
 import (
+    "fmt"
 	"path"
 	"strings"
 	"testing"
@@ -20,9 +21,18 @@ func (c Monkey) perform() (archivePath string, err error) {
 }
 
 func TestBase_archiveFilePath(t *testing.T) {
-	model := config.ModelConfig{}
-	base := newBase(model)
+	viper := viper.New()
+	viper.Set("format", "2006.01.02.15.04.05")
+	base := newBase(config.ModelConfig{
+		CompressWith: config.SubConfig{
+			Type:  "compress_with",
+			Name:  "tar",
+			Viper: viper,
+		},
+	},
 	prefixPath := path.Join(base.model.TempPath, time.Now().Format("2006.01.02.15.04"))
+// 	filepath := base.archiveFilePath(".tar")
+// 	fmt.Println("GoBackup starting...")
 	assert.True(t, strings.HasPrefix(base.archiveFilePath(".tar"), prefixPath))
 	assert.True(t, strings.HasSuffix(base.archiveFilePath(".tar"), ".tar"))
 }
