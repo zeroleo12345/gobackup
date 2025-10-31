@@ -1,7 +1,6 @@
 package compressor
 
 import (
-    "fmt"
 	"path"
 	"strings"
 	"testing"
@@ -9,6 +8,7 @@ import (
 
 	"github.com/gobackup/gobackup/config"
 	"github.com/longbridgeapp/assert"
+	"github.com/spf13/viper"
 )
 
 type Monkey struct {
@@ -29,10 +29,8 @@ func TestBase_archiveFilePath(t *testing.T) {
 			Name:  "tar",
 			Viper: viper,
 		},
-	},
+	})
 	prefixPath := path.Join(base.model.TempPath, time.Now().Format("2006.01.02.15.04"))
-// 	filepath := base.archiveFilePath(".tar")
-// 	fmt.Println("GoBackup starting...")
 	assert.True(t, strings.HasPrefix(base.archiveFilePath(".tar"), prefixPath))
 	assert.True(t, strings.HasSuffix(base.archiveFilePath(".tar"), ".tar"))
 }
