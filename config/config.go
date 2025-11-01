@@ -258,6 +258,8 @@ func loadModel(key string) (ModelConfig, error) {
 		Type:  model.Viper.GetString("compress_with.type"),
 		Viper: model.Viper.Sub("compress_with"),
 	}
+    fmt.Println("format: ", model.CompressWith.Viper.GetString("format"))
+    fmt.Println("compress_with.format: ", model.CompressWith.Viper.GetString("compress_with.format"))
 
 	model.EncryptWith = SubConfig{
 		Type:  model.Viper.GetString("encrypt_with.type"),
