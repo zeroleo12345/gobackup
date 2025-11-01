@@ -257,7 +257,7 @@ func loadModel(key string) (ModelConfig, error) {
         compressViper = viper.New()
     }
     compressViper.SetDefault("type", "tar")
-    compressViper.SetDefault("file_pattern", "2006.01.02.15.04.05")
+    compressViper.SetDefault("file_layout", "2006.01.02.15.04.05")
 	model.CompressWith = SubConfig{
 		Type:  compressViper.GetString("type"),
 		Viper: compressViper,

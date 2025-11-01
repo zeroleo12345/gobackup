@@ -27,7 +27,7 @@ type Compressor interface {
 }
 
 func (c *Base) archiveFilePath(ext string) string {
-    pattern := c.model.CompressWith.Viper.GetString("file_pattern")
+    pattern := c.model.CompressWith.Viper.GetString("file_layout")
     return filepath.Join(c.model.TempPath, time.Now().Format(pattern)+ext)
 }
 
