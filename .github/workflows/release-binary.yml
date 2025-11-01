@@ -32,7 +32,8 @@ jobs:
       - name: "ls"
         run: |
           ls -al
-          cksum gobackup
+          find . -name gobackup
+          cksum install/gobackup
   docker:
     runs-on: ubuntu-latest
     needs: goreleaser
