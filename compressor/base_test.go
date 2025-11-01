@@ -23,7 +23,7 @@ func (c Monkey) perform() (archivePath string, err error) {
 func TestBase_archiveFilePath(t *testing.T) {
     viper := viper.New()
 	viper.SetDefault("compress_with.type", "tar")
-	viper.SetDefault("compress_with.filename_format", "backup-2006.01.02.15.04.05")
+	viper.SetDefault("compress_with.format", "backup-2006.01.02.15.04.05")
     model := config.ModelConfig{}
 	model.CompressWith = config.SubConfig{
 		Type:  viper.GetString("compress_with.type"),
