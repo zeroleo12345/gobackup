@@ -22,6 +22,8 @@ jobs:
         run: |
           cd web
           yarn && yarn build
+          ls -al
+          ls -al ./dist
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v4
         with:
