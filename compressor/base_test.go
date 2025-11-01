@@ -21,15 +21,15 @@ func (c Monkey) perform() (archivePath string, err error) {
 }
 
 func TestBase_archiveFilePath(t *testing.T) {
-	viper := viper.New()
-	viper.Set("filename_format", "backup-2006.01.02.15.04.05")
-	base := newBase(config.ModelConfig{
-		CompressWith: config.SubConfig{
-			Type:  "compress_with",
-			Name:  "tar",
-			Viper: viper,
-		},
-	})
+    viper := viper.New()
+	viper.SetDefault("compress_with.type", "tar")
+	viper.SetDefault("compress_with.filename_format", "backup-2006.01.02.15.04.05")
+    model := config.ModelConfig{}
+	model.CompressWith = config.SubConfig{
+		Type:  viper.GetString("compress_with.type"),
+		Viper: viper.Sub("compress_with"),
+	}
+	base := newBase(model)
 	prefixPath := path.Join(base.model.TempPath, time.Now().Format("backup-2006.01.02.15.04"))
 	archivePath := base.archiveFilePath(".tar")
 	assert.True(t, strings.HasPrefix(archivePath, prefixPath))
