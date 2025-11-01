@@ -22,7 +22,7 @@ func (c Monkey) perform() (archivePath string, err error) {
 
 func TestBase_archiveFilePath(t *testing.T) {
 	viper := viper.New()
-	viper.Set("format", "backup-2006.01.02.15.04.05")
+	viper.Set("filename_format", "backup-2006.01.02.15.04.05")
 	base := newBase(config.ModelConfig{
 		CompressWith: config.SubConfig{
 			Type:  "compress_with",
